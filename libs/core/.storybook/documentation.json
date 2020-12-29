@@ -117,17 +117,17 @@
     "directives": [
         {
             "name": "CorBackgroundDirective",
-            "id": "directive-CorBackgroundDirective-acfeea3ed0ea86dba66e63a7dba73e0e",
+            "id": "directive-CorBackgroundDirective-03f67a409474a5793341dd12af767aba",
             "file": "libs/core/src/lib/core/directives/background.directive.ts",
             "type": "directive",
             "description": "",
-            "sourceCode": "import { Directive, ElementRef, Input } from '@angular/core';\nimport { CorColorBackground, CorColorBackgroundType } from '@umbrelo/data';\n\n@Directive({\n  selector: '[corBackground]'\n})\nexport class CorBackgroundDirective {\n\n  _background:string;\n\n  @Input('corBackground') set background(bg:CorColorBackgroundType){\n    if(!bg || !CorColorBackground.getCssBgClass(bg)) return;\n    if(this._background) this._el.nativeElement.classList.remove(this._background);\n    this._background = CorColorBackground.getCssBgClass(bg);\n    this._el.nativeElement.classList.add(this._background);\n  }\n  constructor(private _el: ElementRef) { }\n\n\n}\n",
+            "sourceCode": "import { Directive, ElementRef, Input } from '@angular/core';\nimport type {CorColorBackgroundType } from '@umbrelo/data';\nimport { CorColorBackground }  from '@umbrelo/data';\n\n@Directive({\n  selector: '[corBackground]'\n})\nexport class CorBackgroundDirective {\n\n  _background:string;\n\n  @Input('corBackground') set background(bg:CorColorBackgroundType){\n    if(!bg || !CorColorBackground.getCssBgClass(bg)) return;\n    if(this._background) this._el.nativeElement.classList.remove(this._background);\n    this._background = CorColorBackground.getCssBgClass(bg);\n    this._el.nativeElement.classList.add(this._background);\n  }\n  constructor(private _el: ElementRef) { }\n\n\n}\n",
             "selector": "[corBackground]",
             "providers": [],
             "inputsClass": [
                 {
                     "name": "corBackground",
-                    "line": 11,
+                    "line": 12,
                     "type": ""
                 }
             ],
@@ -140,7 +140,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 9
+                    "line": 10
                 }
             ],
             "methodsClass": [],
@@ -153,7 +153,7 @@
                         "type": "ElementRef"
                     }
                 ],
-                "line": 16,
+                "line": 17,
                 "jsdoctags": [
                     {
                         "name": "_el",
@@ -177,7 +177,7 @@
                             }
                         ],
                         "returnType": "void",
-                        "line": 11,
+                        "line": 12,
                         "jsdoctags": [
                             {
                                 "name": "bg",

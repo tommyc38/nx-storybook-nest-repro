@@ -1,3 +1,4 @@
+
 export const PALETTE = <const> ['green', 'lightGreen', 'orange', 'brightOrange',
   'pink', 'purple', 'lightPurple', 'blue', 'lightBlue', 'lime', 'brown',
   'grey', 'gold', 'white'];

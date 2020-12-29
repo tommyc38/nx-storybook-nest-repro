@@ -1,5 +1,6 @@
 import { Directive, ElementRef, Input } from '@angular/core';
-import { CorColorBackground, CorColorBackgroundType } from '@umbrelo/data';
+import type {CorColorBackgroundType } from '@umbrelo/data';
+import { CorColorBackground }  from '@umbrelo/data';
 
 @Directive({
   selector: '[corBackground]'
