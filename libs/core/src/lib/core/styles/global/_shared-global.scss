@@ -1,0 +1,275 @@
+@import '~@angular/material/theming';
+@import "./colors";
+@import "./background";
+@import "./icons";
+@import "./buttons";
+
+@mixin cor-shared-global-theme($theme) {
+  @include cor-shared-colors-theme($theme);
+  @include cor-shared-icons-theme($theme);
+  @include cor-shared-buttons-theme($theme);
+  @include cor-shared-background-theme($theme);
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $is-dark: map-get($theme, is-dark);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $rdm-color: map-get($theme, rdm-color);
+  $app: map-get($theme, app);
+
+  .mat-menu-item {
+    cor-icon {
+      margin-right: 16px;
+      mat-icon {
+        color: inherit !important;
+      }
+    }
+  }
+
+  // BEGIN ANGULAR MATERIAL OVERRIDES
+
+  // Bottom Sheet
+  .cor-bottom-sheet-no-padding {
+    padding: 0 !important;
+
+    mat-dialog-container, mat-bottom-sheet-container, .mat-bottom-sheet-container {
+      padding: 0 !important;
+    }
+  }
+
+  .cor-bottom-sheet-title, {
+    .cor-menu-title, {
+      margin: 0;
+    }
+  }
+
+
+  // Menu
+  .cor-list-item cor-avatar {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 16px;
+  }
+
+  // Icon
+  cor-icon > mat-icon {
+    margin: 0 !important;
+  }
+
+  //list item
+  .cor-menu-title {
+    margin-top: -8px;
+    font-size: 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    margin-bottom: 0;
+  }
+
+  .cor-list-item-prefix-content-large {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    flex: 40px 0 0;
+    margin-right: 16px;
+  }
+  .cor-list-item-prefix-content-small {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    flex: 28px 0 0;
+    margin-right: 16px;
+  }
+
+  .cor-btn-no-hover.mat-button:hover .mat-button-focus-overlay {
+    background: transparent !important;
+  }
+  .cor-btn-no-hover.mat-button:hover i {
+    color: mat-color($foreground, icon);
+  }
+  //END ANGULAR MATERIAL OVERRIDES
+
+
+  // Display None
+  .cor-display-none {
+    display: none;
+  }
+
+  .cor-drop-placeholder{
+    background: #ccc;
+    border: dotted 3px #999;
+    min-height: 60px;
+    width: 100%;
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  // Sticky Element
+  .cor-sticky-top {
+    position: sticky;
+    z-index: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    top: 0;
+  }
+
+  // Nav Shell
+  .cor-nav-shell-flex-grow-and-scroll {
+    flex: 1 1;
+    overflow: auto;
+    display: block;
+  }
+
+  // Login / Status
+  .cor-is-logged-in-border {
+    border: 1px solid mat-color($app, 'app-is-logged-in');
+  }
+
+  // Media Img
+  .cor-media-img-filter-black-white {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+  }
+
+
+  $media-overlay-light: rgba(white, .6);
+  $media-overlay-dark: rgba(black, .4);
+  .cor-media-overlay-light, .cor-media-overlay-dark {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cor-media-overlay-light {
+    background: $media-overlay-light;
+  }
+  .cor-media-overlay-dark {
+    background: $media-overlay-dark;
+  }
+  .cor-media-overlay-light-pseudo {
+    &:before {
+      background: $media-overlay-light;
+    }
+  }
+  .cor-media-overlay-dark-pseudo {
+    &:before {
+      background: $media-overlay-dark;
+    }
+  }
+  .cor-media-overlay-circle {
+    border-radius: 100%;
+  }
+  .cor-media-overlay-light-pseudo, .cor-media-overlay-dark-pseudo {
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+  .cor-media-overlay-circle-pseudo {
+    &:before {
+      border-radius: 100%;
+    }
+  }
+
+  // Disabled State
+  .cor-disabled {
+    pointer-events: none;
+  }
+
+  // List Item
+  cor-list-item {
+    cor-avatar {
+      margin-right: 16px;
+
+    }
+  }
+
+  // Top Elevation (matches mat-elevation-z3)
+  .cor-elevation-top-z3 {
+    box-shadow: 0px -2px 6px 0 rgba(0, 0, 0, 0.12),
+    0px -2px 3px 0px rgba(0, 0, 0, 0.14),
+    0px -1px 1px -2px rgba(0, 0, 0, 0.24);
+  }
+
+
+  // Divider / Border
+  .cor-border-bottom {
+    border-bottom: 1px solid mat-color($foreground, dividers);
+  }
+  .cor-border-top {
+    border-top: 1px solid mat-color($foreground, dividers);
+  }
+  // When you have an overflow container either above or below
+  // another element with a border but don't want to double up
+  // when items in the overflow container also have borders that
+  // create a double effect when they are touching.
+  .cor-border-top-overflow, .cor-border-bottom-overflow, .cor-elevation-top-z3 {
+
+    position: relative;
+
+    &:after {
+      content: '';
+      height: 1px;
+      left: 0;
+      right: 0;
+      background: inherit;
+      position: absolute;
+      display: block;
+    }
+
+    &:before {
+      content: '';
+      height: 1px;
+      left: 0;
+      right: 0;
+      background: mat-color($foreground, dividers);
+      position: absolute;
+      display: block;
+
+    }
+  }
+
+  .cor-border-bottom-overflow {
+    &:after {
+      bottom: 0;
+    }
+
+    &:before {
+      bottom: 2px;
+    }
+  }
+  .cor-border-top-overflow, .cor-elevation-top-z3 {
+    position: relative;
+
+    &:after {
+      top: -1px;
+    }
+
+    &:before {
+      top: -2px;
+    }
+  }
+
+
+}
+
+@mixin cor-shared-global-typography($config) {
+
+  .cor-menu-title {
+    font-size: mat-font-size($config, caption);
+  }
+}
+

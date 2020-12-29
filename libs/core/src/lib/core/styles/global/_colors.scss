@@ -1,0 +1,266 @@
+@import '~@angular/material/theming';
+
+@mixin cor-color-palette($palette) {
+  @each $name, $hex in $palette {
+    @if type-of($hex) == color {
+      &#{$name} {
+        color: $hex;
+      }
+    }
+  }
+}
+
+@mixin cor-color-text-contrast($name, $is-dark) {
+  @if ($is-dark) {
+    @if $name == 'default' {
+      color: $dark-primary-text;
+    } @else {
+      color: $dark-secondary-text;
+    }
+  } @else {
+    @if $name == 'default' {
+      color: $light-primary-text;
+    } @else {
+      color: $light-secondary-text;
+    }
+  }
+}
+
+@mixin cor-color-text($name-to-palette-map, $is-dark) {
+
+  @each $name, $pal in $name-to-palette-map {
+    &#{$name} {
+      @if $name == 'default' or $name == 'secondary' {
+        color: $pal;
+      } @else {
+        color: mat-color($pal, 'text');
+      }
+    }
+    &#{$name}-hover-contrast {
+      @if $name == 'default' or $name == 'secondary' {
+      } @else {
+        color: mat-color($pal, 'text');
+        &:hover {
+          color: mat-color($pal, 'default-contrast');
+        }
+      }
+    }
+    &#{$name}-light {
+      @if $name == 'default' or $name == 'secondary' {
+      } @else {
+        color: mat-color($pal, 'lighter');
+      }
+    }
+    &#{$name}-dark {
+      @if $name == 'default' or $name == 'secondary' {
+      } @else {
+        color: mat-color($pal, 'darker');
+      }
+    }
+
+    &hover-#{$name} {
+      &:hover {
+        @if $name == 'default' or $name == 'secondary' {
+          color: $pal;
+        } @else {
+          color: mat-color($pal, 'text');
+        }
+      }
+    }
+    &hover-#{$name}-light {
+      &:hover {
+        @if $name == 'default' or $name == 'secondary' {
+        } @else {
+          color: mat-color($pal, 'lighter');
+        }
+      }
+    }
+    &hover-#{$name}-contrast, {
+
+      &:hover {
+        @if $name == 'default' or $name == 'secondary' {
+        } @else {
+          color: mat-color($pal, 'default-contrast');
+        }
+      }
+    }
+    &hover-#{$name}-light-contrast {
+      &:hover {
+        @if $name == 'default' or $name == 'secondary' {
+        } @else {
+          color: mat-color($pal, 'lighter-contrast');
+        }
+      }
+    }
+    &hover-#{$name}-dark-contrast {
+      &:hover {
+        @if $name == 'default' or $name == 'secondary' {
+        } @else {
+          color: mat-color($pal, 'darker-contrast');
+        }
+      }
+    }
+
+    &#{$name}-contrast {
+      @if $name == 'default' or $name == 'secondary' {
+        @include cor-color-text-contrast($name, $is-dark);
+      } @else {
+        color: mat-color($pal, 'default-contrast');
+      }
+
+    }
+    &#{$name}-light-contrast {
+      @if $name == 'default' or $name == 'secondary' {
+      } @else {
+        color: mat-color($pal, 'lighter-contrast');
+      }
+    }
+    &#{$name}-dark-contrast {
+      @if $name == 'default' or $name == 'secondary' {
+      } @else {
+        color: mat-color($pal, 'darker-contrast');
+      }
+    }
+
+    &#{$name}-blink {
+      @if $name == 'default' or $name == 'secondary' {
+        color: $pal;
+        &:hover {
+          @if ($is-dark) {
+            color: #ffffff;
+          } @else {
+            color: #000000;
+          }
+        }
+      } @else {
+        color: mat-color($pal, 'text');
+        &:hover {
+          color: mat-color($pal, 'darker');
+        }
+      }
+    }
+
+    &#{$name}-blink-contrast {
+      @if $name == 'default' or $name == 'secondary' {
+        @include cor-color-text-contrast($name, $is-dark);
+        &:hover {
+          @if ($is-dark) {
+            color: #000000;
+          } @else {
+            color: #ffffff;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@mixin cor-shared-colors-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $is-dark: map-get($theme, is-dark);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $pal: map-get($theme, pal);
+  $app: map-get($theme, app);
+
+  $cor-name-map: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    default: mat-color($foreground, text),
+    secondary: mat-color($foreground, secondary-text),
+  );
+
+  .cor-color-txt-inherit {
+    color: inherit;
+
+    &:hover {
+      color: inherit !important;
+    }
+  }
+
+  // Only these colors are allowed for text
+  .cor-color-txt- {
+    @include cor-color-text($cor-name-map, $is-dark);
+
+    &default-white{
+      color: rgba(white, 0.86);
+    }
+
+    &default-white-blink{
+      color: rgba(white, 0.86);
+      &:hover{
+        color: white;
+      }
+    }
+
+    &default-black{
+      color: rgba(black, 0.86);
+    }
+    &default-black-blink{
+      color: rgba(black, 0.86);
+      &:hover{
+        color: black;
+      }
+    }
+  }
+
+  // These are random colors for app features that need a small palette
+  .cor-color- {
+    @include cor-color-palette($pal);
+  }
+
+  // These are app specific colors (e.g. green to indicate a user is online).
+  .cor-color- {
+    @include cor-color-palette($app);
+  }
+
+
+  .cor-color-txt-disabled-contrast, .cor-color-disabled-contrast {
+    @if ($is-dark) {
+      color: $dark-disabled-text !important;
+      [class*='cor-color-txt'] {
+        color: $dark-disabled-text !important;
+      }
+    } @else {
+      color: $light-disabled-text;
+      [class*='cor-color-txt'] {
+        color: $dark-disabled-text !important;
+      }
+    }
+  }
+  .cor-color-txt-disabled, .cor-color-disabled {
+    color: mat-color($foreground, disabled-text) !important;
+
+    [class*='cor-color-txt'] {
+      color: mat-color($foreground, disabled-text) !important;
+    }
+  }
+
+
+  cor-list-item[class*='cor-color'] cor-list-item-content.cor-icon-caret-collapsed-list-item-l cor-text div :first-child,
+  cor-list-item[class*='cor-color'] cor-list-item-content.cor-icon-caret-collapsed-list-item-r cor-text div :last-child {
+    &:after {
+      color: inherit;
+    }
+  }
+
+  cor-priority-menu [class*='cor-color-txt-hover'], cor-list-item[class*='cor-color-txt-hover'] {
+    &:hover {
+      cor-icon, cor-text, .cor-list-item-collapsed {
+        color: inherit;
+      }
+    }
+  }
+
+  cor-priority-menu [class*='cor-color-txt-']:not([class*='cor-color-txt-hover']),
+  cor-list-item[class*='cor-color-txt-']:not([class*='cor-color-txt-hover']) {
+    cor-icon, cor-text, .cor-list-item-collapsed {
+      color: inherit;
+    }
+  }
+}

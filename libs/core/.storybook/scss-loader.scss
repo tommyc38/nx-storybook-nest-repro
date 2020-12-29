@@ -1,0 +1,39 @@
+//@import '../../../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
+/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/theming';
+@import "../src/lib/core/styles/themes-components/all-theme"; // all component themes
+@import "../src/lib/core/styles/themes-components/all-typography"; // all component typography themes
+@import "../src/lib/core/styles/themes-default/theming"; // default primary and accent theme
+@include mat-core();
+$config: mat-typography-config();
+
+.default-light {
+
+  @include angular-material-theme($cor-default-light-theme); // feed all angular material components your theme
+  @include cor-components-theme($cor-default-light-theme); // feed all core library components your theme
+  @include cor-components-typography($config) // feed all core library components the typography config
+
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+  overflow: auto;
+}
+
+html {
+  overflow: hidden;
+}
+

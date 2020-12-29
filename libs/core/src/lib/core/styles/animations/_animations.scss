@@ -1,0 +1,89 @@
+@keyframes scale-rotate {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  12.5% {
+    transform: scale(0.5) rotate(45deg);
+  }
+  25% {
+    transform: scale(1) rotate(90deg);
+  }
+  37.5% {
+    transform: scale(0.5) rotate(135deg);
+  }
+  50% {
+    transform: scale(1) rotate(180deg);
+  }
+  62.5% {
+    transform: scale(0.5) rotate(225deg);
+  }
+  75% {
+    transform: scale(1) rotate(270deg);
+  }
+  87.5% {
+    transform: scale(0.5) rotate(315deg);
+  }
+  100% {
+    transform: scale(1) rotate(260deg);
+  }
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  12.5% {
+    transform: scale(0.5);
+  }
+  25% {
+    transform: scale(1);
+  }
+  37.5% {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1);
+  }
+  62.5% {
+    transform: scale(0.5);
+  }
+  75% {
+    transform: scale(1);
+  }
+  87.5% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes grayscale-filter {
+  0% {
+    filter: grayscale(0);
+  }
+  12.5% {
+    filter: grayscale(12.5%);
+  }
+  25% {
+    filter: grayscale(25%);
+  }
+  37.5% {
+    filter: grayscale(37.5%);
+  }
+  50% {
+    filter: grayscale(50%);
+  }
+  62.5% {
+    filter: grayscale(62.5%);
+  }
+  75% {
+    filter: grayscale(75%);
+  }
+  87.5% {
+    filter: grayscale(87.5%);
+  }
+  100% {
+    filter: grayscale(100%);
+  }
+}

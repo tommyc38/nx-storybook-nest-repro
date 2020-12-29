@@ -1,0 +1,29 @@
+body:not(.cor-accessibility-enabled) button:focus,
+body:not(.cor-accessibility-enabled) a:focus,
+body:not(.cor-accessibility-enabled) input:focus,
+body:not(.cor-accessibility-enabled) select:focus,
+body:not(.cor-accessibility-enabled) textarea:focus {
+  outline: none;
+}
+body.cor-accessibility-enabled button:focus,
+body.cor-accessibility-enabled a:focus,
+body.cor-accessibility-enabled input:focus,
+body.cor-accessibility-enabled select:focus,
+body.cor-accessibility-enabled textarea:focus {
+  outline: -webkit-focus-ring-color auto 5px;
+  outline-offset: -4px;
+}
+
+body.cor-accessibility-enabled button.cor-focus-ring-contrast:focus,
+body.cor-accessibility-enabled .cor-focus-ring-contrast button:focus,
+body.cor-accessibility-enabled a.cor-focus-ring-contrast:focus,
+body.cor-accessibility-enabled .cor-focus-ring-contrast a:focus,
+body.cor-accessibility-enabled input.cor-focus-ring-contrast:focus,
+body.cor-accessibility-enabled .cor-focus-ring-contrast input:focus,
+body.cor-accessibility-enabled select.cor-focus-ring-contrast:focus,
+body.cor-accessibility-enabled .cor-focus-ring-contrast select:focus,
+body.cor-accessibility-enabled textarea.cor-focus-ring-contrast:focus,
+body.cor-accessibility-enabled .cor-focus-ring-contrast textarea:focus {
+  outline: rgba(255,255,255,0.86) auto 5px;
+  outline-offset: -4px;
+}

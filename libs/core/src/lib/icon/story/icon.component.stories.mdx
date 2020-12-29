@@ -1,0 +1,165 @@
+import { Story, Meta } from '@storybook/addon-docs/blocks';
+import { moduleMetadata } from '@storybook/angular';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { CorIconModule } from '../icon.module';
+
+<Meta title="Icons"
+  decorators={[moduleMetadata({
+      imports: [
+        CommonModule,
+        CorIconModule,
+        MatIconModule
+      ]
+})]}/>
+
+# Icon
+
+`<cor-icon>` - A wrapper to normalize Material Icons, Font Awesome, and Cor Icons (internal custom SVG icon lib located
+in core/shared-assets).
+
+
+### Size
+
+The size the icon can be set by the `size` input variable (in pixels). The default size is 24.
+
+### Icon Set
+
+The default icon set is Material Icons.  To change to a different icon set/family, pass the set string
+to the `iconSetClass` input variable.
+
+If an icon family other than Material Icons, Font Awesome, or Cor Icons is needed, the `iconIsLigature` input
+variable may also need to be set.  Because the default icon class is Material Icons, this flag is set to _true_.
+For convenience, Font Awesome icons will automatically set `iconIsLigature` to _false_.
+
+##### Example
+<Story name="Icon" height="200px">
+  {{
+    template:
+    `
+      <div class="example">
+      <cor-icon icon="public"></cor-icon>
+      <cor-icon icon="fa-angular" iconSetClass="fab"></cor-icon>
+      <cor-icon [size]="14" icon="public"></cor-icon>
+      <cor-icon [size]="14" icon="fa-angular" iconSetClass="fab"></cor-icon>
+      <cor-icon [size]="12" icon="public"></cor-icon>
+      <cor-icon [size]="12" icon="fa-angular" iconSetClass="fab"></cor-icon>
+      <cor-icon [size]="11" icon="public"></cor-icon>
+      <cor-icon [size]="11" icon="fa-angular" iconSetClass="fab"></cor-icon>
+      <cor-icon icon="folder"></cor-icon>
+      <cor-icon icon="fa-folder" iconSetClass="fas"></cor-icon>
+      <cor-icon [size]="14" icon="folder"></cor-icon>
+      <cor-icon [size]="14" icon="fa-folder" iconSetClass="fas"></cor-icon>
+      <cor-icon [size]="12" icon="folder"></cor-icon>
+      <cor-icon [size]="12" icon="fa-folder" iconSetClass="fas"></cor-icon>
+      <cor-icon [size]="11" icon="folder"></cor-icon>
+      <cor-icon [size]="11" icon="fa-folder" iconSetClass="fas"></cor-icon>
+      </div>
+      <br>
+      <div class="example">
+         <cor-icon icon="public"></cor-icon>
+         <cor-icon icon="cor-admin" ></cor-icon>
+         <cor-icon icon="verified_user" ></cor-icon>
+      </div>
+      <br>
+      <div style="width:150px; height: 150px; font-size: 100px; line-height: 100px">
+         <cor-icon icon="cor-admin" [inline]="true" ></cor-icon>
+      </div>
+      <br>
+      <div style="width:150px; height: 150px; font-size: 150px; line-height: 150px">
+      <mat-icon [inline]="true">public</mat-icon>
+      </div>
+    `,
+    styles:[
+    `
+    .example{
+    max-width:340px;
+    width: 100%;
+    }
+    .example cor-icon{
+    vertical-align: middle;
+    }
+    `],
+    props: {
+    },
+  }}
+</Story>
+
+## Color
+
+The `color` property can be changed by passing in a valid
+[CorColorTextType](/?path=/docs/cor-module--colors) (e.g. primary, accent, default, ect.).
+The default color is set to _secondary_.
+
+##### Example
+<Story name="Color" height="200px">
+  {{
+    template:
+    `
+      <div class="example">
+         <cor-icon icon="person"></cor-icon>
+         <cor-icon icon="public" color="inherit"></cor-icon>
+         <cor-icon icon="cor-admin" color="primary" ></cor-icon>
+         <cor-icon icon="verified_user" color="lime" ></cor-icon>
+        <cor-icon [size]="27"  icon="fa-angular" iconSetClass="fab"></cor-icon>
+      </div>
+    `,
+    styles:[
+    `
+    .example{
+    color: red;
+    max-width:340px;
+    width: 100%;
+    }
+    .example cor-icon{
+    vertical-align: middle;
+    margin-right: 6px;
+    }
+    `],
+    props: {
+    },
+  }}
+</Story>
+
+## Badge
+Angular Material's badge is used under the hood.  See the api [here](https://material.angular.io/components/badge/api).
+
+### Size
+The size of the badge can be any of the following: 'small', 'medium', 'large'.  The default size is `small`.
+
+### Color
+The `badgeBackground` can be used to set the badge color: `primary`, `accent`, `warn`.  The default color is `warn`.
+
+
+### Visibility
+To hide the badge, set the `badgeIsHidden` input variable to _true_.
+
+##### Example
+<Story name="Badge" height="200px">
+  {{
+    template:
+    `
+      <div class="example">
+         <cor-icon icon="person" [badge]="badge"></cor-icon>
+         <cor-icon icon="public" [badge]="badge" [badgeBackground]="primary"></cor-icon>
+         <cor-icon icon="cor-admin" [badge]="badge" badgeSize="medium" ></cor-icon>
+        <cor-icon [size]="27"  icon="fa-angular" iconSetClass="fab" [badge]="badge" [badgeIsHidden]="true"></cor-icon>
+      </div>
+    `,
+    styles:[
+    `
+    .example{
+    color: red;
+    max-width:340px;
+    width: 100%;
+    }
+    .example cor-icon{
+    vertical-align: middle;
+    margin-right: 12px;
+    }
+    `],
+    props: {
+    badge:12
+    },
+  }}
+</Story>

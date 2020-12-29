@@ -1,0 +1,1307 @@
+{
+    "pipes": [],
+    "interfaces": [
+        {
+            "name": "CanColorText",
+            "id": "interface-CanColorText-ace6fe4f0a32f9986944657864608893",
+            "file": "libs/core/src/lib/core/common-behaviors/color.ts",
+            "type": "interface",
+            "sourceCode": "import { HasElementRef } from './background';\nimport { CorColorText, CorColorTextType } from '@umbrelo/data';\n\ntype Constructor<T> = new(...args: any[]) => T;\n\nexport interface CanColorText {\n  color: CorColorTextType | 'remove';\n  _colorCssClass:string;\n}\nexport type CanColorTextCor = Constructor<CanColorText>;\n\n/** Mixin to augment a directive with a `color` property. */\nexport function mixinColorText<T extends Constructor<HasElementRef>>(\n  base: T, defaultColor?: CorColorTextType): CanColorTextCor & T {\n  return class extends base {\n\n    _color:CorColorTextType = defaultColor;\n   _colorCssClass:string = defaultColor? CorColorText.getCssColorClass(defaultColor):null;\n    get color(){return this._color;}\n    set color(value:CorColorTextType | 'remove'){\n      if(value === 'remove'){\n        if(this._color) this._elementRef.nativeElement.classList.remove(this._colorCssClass);\n        this._color = null;\n        this._colorCssClass = '';\n        return\n      }\n      const colorText = value ||  defaultColor;\n\n      if(colorText !== this._color){\n        if(this._color){\n          this._elementRef.nativeElement.classList.remove(this._colorCssClass) ;\n        }\n        if(colorText){\n          this._colorCssClass = CorColorText.getCssColorClass(colorText);\n          this._elementRef.nativeElement.classList.add(this._colorCssClass) ;\n        }\n      }\n      this._color = colorText;\n    }\n\n    constructor(...args: any[]) { super(...args); }\n  };\n}\n",
+            "properties": [
+                {
+                    "name": "_colorCssClass",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "color",
+                    "type": "CorColorTextType | \"remove\"",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 150,
+            "methods": []
+        },
+        {
+            "name": "CanSetBackground",
+            "id": "interface-CanSetBackground-ecdda87c0fd4335a1743cae094230e4d",
+            "file": "libs/core/src/lib/core/common-behaviors/background.ts",
+            "type": "interface",
+            "sourceCode": "import { ElementRef } from '@angular/core';\nimport { Constructor } from '@angular/material/core/common-behaviors/constructor';\nimport { CorColorBackground, CorColorBackgroundType } from '@umbrelo/data';\n\nexport interface CanSetBackground {\n  background: CorColorBackgroundType;\n}\nexport interface HasElementRef {\n  _elementRef: ElementRef;\n}\n\nexport type CanSetBackgroundCor = Constructor<CanSetBackground>;\n\n/** Mixin to augment a directive with a `background` property. */\nexport function mixinBackground<T extends Constructor<HasElementRef>>(\n  base: T, defaultColor?:CorColorBackgroundType): CanSetBackgroundCor & T {\n  return class extends base {\n\n    _background:CorColorBackgroundType;\n    _backgroundCssClass:string;\n    get background(){return this._background;}\n    set background(value:CorColorBackgroundType){\n      const colorText = value ||  defaultColor;\n\n      if(colorText !== this._background){\n        if(this._background){\n          this._elementRef.nativeElement.classList.remove(this._backgroundCssClass) ;\n        }\n        if(colorText){\n          this._backgroundCssClass = CorColorBackground.getCssBgClass(colorText);\n          this._elementRef.nativeElement.classList.add(this._backgroundCssClass) ;\n        }\n      }\n      this._background = colorText;\n    }\n\n    constructor(...args: any[]) { super(...args); }\n  };\n}\n",
+            "properties": [
+                {
+                    "name": "background",
+                    "type": "CorColorBackgroundType",
+                    "optional": false,
+                    "description": "",
+                    "line": 6
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 150,
+            "methods": []
+        },
+        {
+            "name": "HasElementRef",
+            "id": "interface-HasElementRef-ecdda87c0fd4335a1743cae094230e4d",
+            "file": "libs/core/src/lib/core/common-behaviors/background.ts",
+            "type": "interface",
+            "sourceCode": "import { ElementRef } from '@angular/core';\nimport { Constructor } from '@angular/material/core/common-behaviors/constructor';\nimport { CorColorBackground, CorColorBackgroundType } from '@umbrelo/data';\n\nexport interface CanSetBackground {\n  background: CorColorBackgroundType;\n}\nexport interface HasElementRef {\n  _elementRef: ElementRef;\n}\n\nexport type CanSetBackgroundCor = Constructor<CanSetBackground>;\n\n/** Mixin to augment a directive with a `background` property. */\nexport function mixinBackground<T extends Constructor<HasElementRef>>(\n  base: T, defaultColor?:CorColorBackgroundType): CanSetBackgroundCor & T {\n  return class extends base {\n\n    _background:CorColorBackgroundType;\n    _backgroundCssClass:string;\n    get background(){return this._background;}\n    set background(value:CorColorBackgroundType){\n      const colorText = value ||  defaultColor;\n\n      if(colorText !== this._background){\n        if(this._background){\n          this._elementRef.nativeElement.classList.remove(this._backgroundCssClass) ;\n        }\n        if(colorText){\n          this._backgroundCssClass = CorColorBackground.getCssBgClass(colorText);\n          this._elementRef.nativeElement.classList.add(this._backgroundCssClass) ;\n        }\n      }\n      this._background = colorText;\n    }\n\n    constructor(...args: any[]) { super(...args); }\n  };\n}\n",
+            "properties": [
+                {
+                    "name": "_elementRef",
+                    "type": "ElementRef",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 150,
+            "methods": []
+        }
+    ],
+    "injectables": [],
+    "classes": [
+        {
+            "name": "CorIconBase",
+            "id": "class-CorIconBase-516e77a20ce07ac8ba4136a2c9d7d294",
+            "file": "libs/core/src/lib/icon/icon.component.ts",
+            "type": "class",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnInit } from '@angular/core';\nimport { CanColorText, CanColorTextCor, mixinColorText } from '@umbrelo/core';\nimport { MatIconRegistry } from '@angular/material/icon';\nimport { DomSanitizer } from '@angular/platform-browser';\n\n//mixin boiler plate\nclass CorIconBase {\n  constructor(public _elementRef: ElementRef) {\n  }\n}\n\nconst _CorIconMixinBase: CanColorTextCor &\n  typeof CorIconBase = mixinColorText(CorIconBase, 'secondary');\n\n/**\n * Cor Icons\n *\n * A wrapper to help normalize the differences between Material Icons,\n * Font Awesome, and Cor Icons (internal icons).  Badges can also\n * be applied which uses Material Badge under the hood.\n *\n */\n@Component({\n  selector: 'cor-icon',\n  templateUrl: './icon.component.html',\n  styleUrls: ['./icon.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush\n})\nexport class CorIconComponent extends _CorIconMixinBase implements OnInit, CanColorText {\n\n  /** @Ignore * The CSS class to apply */\n  _colorCssClass;\n\n  /** * The color of the icon.  The default value is _secondary_. */\n  @Input() color;\n\n  /** The badge content. */\n  @Input() badge: any;\n\n  /** The size of the icon badge. */\n  @Input() badgeSize: 'small' | 'medium' | 'large' = 'small';\n\n  /** The background color of the badge. */\n  @Input() badgeBackground: 'warn' | 'primary' | 'accent' = 'warn';\n\n  /** Whether the badge should be hidden. */\n  @Input() badgeIsHidden = false;\n\n  @Input() inline = false;\n\n  /** Whether Cor Icons should normalize to Material Icons. */\n  @Input() corNormalizeToMat = true;\n\n  _size = 24;\n  /** The size of the icon (in pixels). */\n  @Input() set size(num: number) {\n    if (!num) return;\n    this._size = num;\n  };\n\n  /** The size needed to normalize a Material Icon size to FA. */\n  _faReductionFactor = .85;\n  disabled = false;\n\n  _iconIsLigature = true;\n  /** Whether the icon is a ligature*/\n  @Input() set iconIsLigature(value: boolean) {\n    if (typeof value !== 'boolean') return;\n    this._iconIsLigature = value;\n  };\n  get iconIsLigature(){\n    return this._iconIsLigature;\n  }\n\n  _iconSetClass = 'material-icons';\n  /** The icon class set. The default is material-icons */\n  @Input() set iconSetClass(value: string) {\n    if (typeof value !== 'string') return;\n    this._iconSetClass = value;\n  }\n  get iconSetClass(){\n    return this._iconSetClass;\n  }\n\n  _icon: string;\n  _isCorIcon = false;\n\n  /** The icon name. */\n  @Input() set icon(icon: string) {\n    if (typeof icon !== 'string') return;\n    if (/^fa-/.test(icon) && this._iconSetClass !== 'material-icons') {\n      this._iconIsLigature = false;\n      this._icon = icon;\n    } else if (/^cor-/.test(icon)) {\n      this._isCorIcon = true;\n      this._icon = icon;\n    } else {\n      this._icon = icon;\n      this._isCorIcon = false;\n    }\n  };\n\n\n  /** @ignore */\n  @HostBinding('style.height') get height() {\n    return this.inline ? 'inherit' : this._size + 'px';\n  }\n\n  /** @ignore */\n  @HostBinding('style.width') get width() {\n    return this.inline ? 'inherit' : this._size + 'px';\n  }\n\n  constructor(public elementRef: ElementRef, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {\n    super(elementRef);\n\n    iconRegistry.addSvgIconSet(sanitizer.bypassSecurityTrustResourceUrl('assets/icons/cor-icons.svg'));\n\n    /** Set the default color */\n    this._elementRef.nativeElement.classList.add(this._colorCssClass);\n  }\n\n  ngOnInit() {\n  }\n\n}\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "_elementRef",
+                        "type": "ElementRef"
+                    }
+                ],
+                "line": 7,
+                "jsdoctags": [
+                    {
+                        "name": "_elementRef",
+                        "type": "ElementRef",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "properties": [
+                {
+                    "name": "_elementRef",
+                    "type": "ElementRef",
+                    "optional": false,
+                    "description": "",
+                    "line": 8,
+                    "modifierKind": [
+                        114
+                    ]
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        }
+    ],
+    "directives": [
+        {
+            "name": "CorBackgroundDirective",
+            "id": "directive-CorBackgroundDirective-acfeea3ed0ea86dba66e63a7dba73e0e",
+            "file": "libs/core/src/lib/core/directives/background.directive.ts",
+            "type": "directive",
+            "description": "",
+            "sourceCode": "import { Directive, ElementRef, Input } from '@angular/core';\nimport { CorColorBackground, CorColorBackgroundType } from '@umbrelo/data';\n\n@Directive({\n  selector: '[corBackground]'\n})\nexport class CorBackgroundDirective {\n\n  _background:string;\n\n  @Input('corBackground') set background(bg:CorColorBackgroundType){\n    if(!bg || !CorColorBackground.getCssBgClass(bg)) return;\n    if(this._background) this._el.nativeElement.classList.remove(this._background);\n    this._background = CorColorBackground.getCssBgClass(bg);\n    this._el.nativeElement.classList.add(this._background);\n  }\n  constructor(private _el: ElementRef) { }\n\n\n}\n",
+            "selector": "[corBackground]",
+            "providers": [],
+            "inputsClass": [
+                {
+                    "name": "corBackground",
+                    "line": 11,
+                    "type": ""
+                }
+            ],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [
+                {
+                    "name": "_background",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                }
+            ],
+            "methodsClass": [],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "_el",
+                        "type": "ElementRef"
+                    }
+                ],
+                "line": 16,
+                "jsdoctags": [
+                    {
+                        "name": "_el",
+                        "type": "ElementRef",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "accessors": {
+                "background": {
+                    "name": "background",
+                    "setSignature": {
+                        "name": "background",
+                        "type": "void",
+                        "args": [
+                            {
+                                "name": "bg",
+                                "type": ""
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 11,
+                        "jsdoctags": [
+                            {
+                                "name": "bg",
+                                "type": "",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "name": "CorButtonDirective",
+            "id": "directive-CorButtonDirective-8737036477f17505fe6e6fba81c80ba1",
+            "file": "libs/core/src/lib/core/directives/button.directive.ts",
+            "type": "directive",
+            "description": "",
+            "sourceCode": "import { Directive, ElementRef, Input } from '@angular/core';\n\n@Directive({\n  selector: '[corButton]'\n})\nexport class CorButtonDirective {\n\n  _noRadius = false;\n\n  @Input() set noButtonRadius(bool: boolean) {\n    if (typeof bool !== 'boolean') return;\n    if (!bool && this._noRadius) {\n      this._noRadius = false;\n      this._el.nativeElement.classList.remove('cor-button-radius');\n    } else if (bool && !this._noRadius) {\n      this._noRadius = true;\n      this._el.nativeElement.classList.add('cor-button-radius');\n    }\n  };\n\n  constructor(private _el: ElementRef) {\n    this._el.nativeElement.classList.add('cor-button');\n  }\n\n}\n",
+            "selector": "[corButton]",
+            "providers": [],
+            "inputsClass": [
+                {
+                    "name": "noButtonRadius",
+                    "line": 10,
+                    "type": "boolean"
+                }
+            ],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [
+                {
+                    "name": "_noRadius",
+                    "defaultValue": "false",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                }
+            ],
+            "methodsClass": [],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "_el",
+                        "type": "ElementRef"
+                    }
+                ],
+                "line": 19,
+                "jsdoctags": [
+                    {
+                        "name": "_el",
+                        "type": "ElementRef",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "accessors": {
+                "noButtonRadius": {
+                    "name": "noButtonRadius",
+                    "setSignature": {
+                        "name": "noButtonRadius",
+                        "type": "void",
+                        "args": [
+                            {
+                                "name": "bool",
+                                "type": "boolean"
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 10,
+                        "jsdoctags": [
+                            {
+                                "name": "bool",
+                                "type": "boolean",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "name": "CorColorDirective",
+            "id": "directive-CorColorDirective-e26a49c9c34917c64810400d47bdad7c",
+            "file": "libs/core/src/lib/core/directives/color.directive.ts",
+            "type": "directive",
+            "description": "",
+            "sourceCode": "import { Directive, ElementRef, Input } from '@angular/core';\nimport { CorColorText, CorColorTextType } from '@umbrelo/data';\n\n@Directive({\n  selector: '[corColor]'\n})\nexport class CorColorDirective {\n\n  _disabled:boolean;\n  @Input()set colorDisabled(bool: boolean){\n    if(typeof bool !== 'boolean')return;\n    const dis = 'cor-color-disabled';\n    if(bool){\n      this._disabled = bool;\n      this._el.nativeElement.classList.add(dis);\n      return\n    }\n     if(this._disabled) this._disabled = false;\n    this._el.nativeElement.classList.remove(dis);\n\n  }\n  _color:string;\n  @Input('corColor') set color(color:CorColorTextType | 'remove'){\n    if(color === 'remove'){\n      this._el.nativeElement.classList.remove(this._color);\n      this._color = '';\n      return\n    }\n   if(!color || !CorColorText.getCssColorClass(color)) return;\n   if(this._color) this._el.nativeElement.classList.remove(this._color);\n   this._color = CorColorText.getCssColorClass(color);\n   this._el.nativeElement.classList.add(this._color);\n  }\n  constructor(private _el: ElementRef) { }\n\n}\n",
+            "selector": "[corColor]",
+            "providers": [],
+            "inputsClass": [
+                {
+                    "name": "colorDisabled",
+                    "line": 10,
+                    "type": "boolean"
+                },
+                {
+                    "name": "corColor",
+                    "line": 23,
+                    "type": ""
+                }
+            ],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [
+                {
+                    "name": "_color",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 22
+                },
+                {
+                    "name": "_disabled",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                }
+            ],
+            "methodsClass": [],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "_el",
+                        "type": "ElementRef"
+                    }
+                ],
+                "line": 33,
+                "jsdoctags": [
+                    {
+                        "name": "_el",
+                        "type": "ElementRef",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "accessors": {
+                "colorDisabled": {
+                    "name": "colorDisabled",
+                    "setSignature": {
+                        "name": "colorDisabled",
+                        "type": "void",
+                        "args": [
+                            {
+                                "name": "bool",
+                                "type": "boolean"
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 10,
+                        "jsdoctags": [
+                            {
+                                "name": "bool",
+                                "type": "boolean",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "color": {
+                    "name": "color",
+                    "setSignature": {
+                        "name": "color",
+                        "type": "void",
+                        "args": [
+                            {
+                                "name": "color",
+                                "type": ""
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 23,
+                        "jsdoctags": [
+                            {
+                                "name": "color",
+                                "type": "",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "name": "CorMeasureElementDirective",
+            "id": "directive-CorMeasureElementDirective-eac5b7fd70fdbb74dffd374e0c8f5dfa",
+            "file": "libs/core/src/lib/core/directives/measure-element.directive.ts",
+            "type": "directive",
+            "description": "",
+            "sourceCode": "import { AfterViewInit, Directive, ElementRef, EventEmitter, Output } from '@angular/core';\nimport { ViewportRuler } from '@angular/cdk/overlay';\nimport { ICorElementDimensions } from '@umbrelo/data';\n\n\n@Directive({\n  selector: '[corMeasureElement]'\n})\nexport class CorMeasureElementDirective implements AfterViewInit{\n\n\n  visible: ICorElementDimensions;\n  scrollable: ICorElementDimensions;\n\n  @Output() visibleDimensions = new EventEmitter<ICorElementDimensions>();\n  @Output() scrollableDimensions = new EventEmitter<ICorElementDimensions>();\n\n  constructor(public _elementRef: ElementRef, private resize: ViewportRuler) {\n\n    this.resize.change().subscribe(size => {\n\n      this.takeMeasurement();\n\n    });\n  }\n\n  ngAfterViewInit(): void {\n    this.takeMeasurement();\n\n  }\n\n  getOffsetWidth(): number {\n    return this._elementRef.nativeElement.offsetWidth;\n  }\n\n  getOffsetHeight(): number{\n    return this._elementRef.nativeElement.offsetHeight;\n  }\n\n  takeMeasurement() {\n    this.scrollable = { height: this._elementRef.nativeElement.scrollHeight, width: this._elementRef.nativeElement.scrollWidth };\n    this.visible = { height: this._elementRef.nativeElement.clientHeight, width: this._elementRef.nativeElement.clientWidth };\n\n    this.visibleDimensions.emit(this.visible);\n    this.scrollableDimensions.emit(this.scrollable);\n\n\n  }\n\n}\n",
+            "selector": "[corMeasureElement]",
+            "providers": [],
+            "inputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "scrollableDimensions",
+                    "defaultValue": "new EventEmitter<ICorElementDimensions>()",
+                    "line": 16,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "visibleDimensions",
+                    "defaultValue": "new EventEmitter<ICorElementDimensions>()",
+                    "line": 15,
+                    "type": "EventEmitter"
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [
+                {
+                    "name": "_elementRef",
+                    "type": "ElementRef",
+                    "optional": false,
+                    "description": "",
+                    "line": 18,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
+                    "name": "scrollable",
+                    "type": "ICorElementDimensions",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "visible",
+                    "type": "ICorElementDimensions",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "getOffsetHeight",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "number",
+                    "typeParameters": [],
+                    "line": 36
+                },
+                {
+                    "name": "getOffsetWidth",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "number",
+                    "typeParameters": [],
+                    "line": 32
+                },
+                {
+                    "name": "ngAfterViewInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 27
+                },
+                {
+                    "name": "takeMeasurement",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 40
+                }
+            ],
+            "implements": [
+                "AfterViewInit"
+            ],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "_elementRef",
+                        "type": "ElementRef"
+                    },
+                    {
+                        "name": "resize",
+                        "type": "ViewportRuler"
+                    }
+                ],
+                "line": 16,
+                "jsdoctags": [
+                    {
+                        "name": "_elementRef",
+                        "type": "ElementRef",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "resize",
+                        "type": "ViewportRuler",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "components": [
+        {
+            "name": "CorIconComponent",
+            "id": "component-CorIconComponent-516e77a20ce07ac8ba4136a2c9d7d294",
+            "file": "libs/core/src/lib/icon/icon.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "cor-icon",
+            "styleUrls": [
+                "./icon.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./icon.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "badge",
+                    "description": "<p>The badge content. </p>\n",
+                    "line": 38,
+                    "type": "any"
+                },
+                {
+                    "name": "badgeBackground",
+                    "defaultValue": "'warn'",
+                    "description": "<p>The background color of the badge. </p>\n",
+                    "line": 44,
+                    "type": "\"warn\" | \"primary\" | \"accent\""
+                },
+                {
+                    "name": "badgeIsHidden",
+                    "defaultValue": "false",
+                    "description": "<p>Whether the badge should be hidden. </p>\n",
+                    "line": 47
+                },
+                {
+                    "name": "badgeSize",
+                    "defaultValue": "'small'",
+                    "description": "<p>The size of the icon badge. </p>\n",
+                    "line": 41,
+                    "type": "\"small\" | \"medium\" | \"large\""
+                },
+                {
+                    "name": "color",
+                    "description": "<ul>\n<li>The color of the icon.  The default value is <em>secondary</em>. </li>\n</ul>\n",
+                    "line": 35
+                },
+                {
+                    "name": "corNormalizeToMat",
+                    "defaultValue": "true",
+                    "description": "<p>Whether Cor Icons should normalize to Material Icons. </p>\n",
+                    "line": 52
+                },
+                {
+                    "name": "icon",
+                    "description": "<p>The icon name. </p>\n",
+                    "line": 89,
+                    "type": "string"
+                },
+                {
+                    "name": "iconIsLigature",
+                    "description": "<p>Whether the icon is a ligature</p>\n",
+                    "line": 67,
+                    "type": "boolean"
+                },
+                {
+                    "name": "iconSetClass",
+                    "description": "<p>The icon class set. The default is material-icons </p>\n",
+                    "line": 77,
+                    "type": "string"
+                },
+                {
+                    "name": "inline",
+                    "defaultValue": "false",
+                    "line": 49
+                },
+                {
+                    "name": "size",
+                    "description": "<p>The size of the icon (in pixels). </p>\n",
+                    "line": 56,
+                    "type": "number"
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "_colorCssClass",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 32,
+                    "jsdoctags": [
+                        {
+                            "pos": 996,
+                            "end": 1004,
+                            "flags": 0,
+                            "kind": 288,
+                            "atToken": {
+                                "pos": 996,
+                                "end": 997,
+                                "flags": 0,
+                                "kind": 57
+                            },
+                            "tagName": {
+                                "pos": 997,
+                                "end": 1003,
+                                "flags": 0,
+                                "escapedText": "Ignore"
+                            },
+                            "comment": "<p>The CSS class to apply </p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "_faReductionFactor",
+                    "defaultValue": ".85",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>The size needed to normalize a Material Icon size to FA. </p>\n",
+                    "line": 62
+                },
+                {
+                    "name": "_icon",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 85
+                },
+                {
+                    "name": "_iconIsLigature",
+                    "defaultValue": "true",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 65
+                },
+                {
+                    "name": "_iconSetClass",
+                    "defaultValue": "'material-icons'",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 75
+                },
+                {
+                    "name": "_isCorIcon",
+                    "defaultValue": "false",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 86
+                },
+                {
+                    "name": "_size",
+                    "defaultValue": "24",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 54
+                },
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 63
+                },
+                {
+                    "name": "elementRef",
+                    "type": "ElementRef",
+                    "optional": false,
+                    "description": "",
+                    "line": 114,
+                    "modifierKind": [
+                        114
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 123
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "<p>Cor Icons</p>\n<p>A wrapper to help normalize the differences between Material Icons,\nFont Awesome, and Cor Icons (internal icons).  Badges can also\nbe applied which uses Material Badge under the hood.</p>\n",
+            "rawdescription": "Cor Icons\n\nA wrapper to help normalize the differences between Material Icons,\nFont Awesome, and Cor Icons (internal icons).  Badges can also\nbe applied which uses Material Badge under the hood.",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnInit } from '@angular/core';\nimport { CanColorText, CanColorTextCor, mixinColorText } from '@umbrelo/core';\nimport { MatIconRegistry } from '@angular/material/icon';\nimport { DomSanitizer } from '@angular/platform-browser';\n\n//mixin boiler plate\nclass CorIconBase {\n  constructor(public _elementRef: ElementRef) {\n  }\n}\n\nconst _CorIconMixinBase: CanColorTextCor &\n  typeof CorIconBase = mixinColorText(CorIconBase, 'secondary');\n\n/**\n * Cor Icons\n *\n * A wrapper to help normalize the differences between Material Icons,\n * Font Awesome, and Cor Icons (internal icons).  Badges can also\n * be applied which uses Material Badge under the hood.\n *\n */\n@Component({\n  selector: 'cor-icon',\n  templateUrl: './icon.component.html',\n  styleUrls: ['./icon.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush\n})\nexport class CorIconComponent extends _CorIconMixinBase implements OnInit, CanColorText {\n\n  /** @Ignore * The CSS class to apply */\n  _colorCssClass;\n\n  /** * The color of the icon.  The default value is _secondary_. */\n  @Input() color;\n\n  /** The badge content. */\n  @Input() badge: any;\n\n  /** The size of the icon badge. */\n  @Input() badgeSize: 'small' | 'medium' | 'large' = 'small';\n\n  /** The background color of the badge. */\n  @Input() badgeBackground: 'warn' | 'primary' | 'accent' = 'warn';\n\n  /** Whether the badge should be hidden. */\n  @Input() badgeIsHidden = false;\n\n  @Input() inline = false;\n\n  /** Whether Cor Icons should normalize to Material Icons. */\n  @Input() corNormalizeToMat = true;\n\n  _size = 24;\n  /** The size of the icon (in pixels). */\n  @Input() set size(num: number) {\n    if (!num) return;\n    this._size = num;\n  };\n\n  /** The size needed to normalize a Material Icon size to FA. */\n  _faReductionFactor = .85;\n  disabled = false;\n\n  _iconIsLigature = true;\n  /** Whether the icon is a ligature*/\n  @Input() set iconIsLigature(value: boolean) {\n    if (typeof value !== 'boolean') return;\n    this._iconIsLigature = value;\n  };\n  get iconIsLigature(){\n    return this._iconIsLigature;\n  }\n\n  _iconSetClass = 'material-icons';\n  /** The icon class set. The default is material-icons */\n  @Input() set iconSetClass(value: string) {\n    if (typeof value !== 'string') return;\n    this._iconSetClass = value;\n  }\n  get iconSetClass(){\n    return this._iconSetClass;\n  }\n\n  _icon: string;\n  _isCorIcon = false;\n\n  /** The icon name. */\n  @Input() set icon(icon: string) {\n    if (typeof icon !== 'string') return;\n    if (/^fa-/.test(icon) && this._iconSetClass !== 'material-icons') {\n      this._iconIsLigature = false;\n      this._icon = icon;\n    } else if (/^cor-/.test(icon)) {\n      this._isCorIcon = true;\n      this._icon = icon;\n    } else {\n      this._icon = icon;\n      this._isCorIcon = false;\n    }\n  };\n\n\n  /** @ignore */\n  @HostBinding('style.height') get height() {\n    return this.inline ? 'inherit' : this._size + 'px';\n  }\n\n  /** @ignore */\n  @HostBinding('style.width') get width() {\n    return this.inline ? 'inherit' : this._size + 'px';\n  }\n\n  constructor(public elementRef: ElementRef, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {\n    super(elementRef);\n\n    iconRegistry.addSvgIconSet(sanitizer.bypassSecurityTrustResourceUrl('assets/icons/cor-icons.svg'));\n\n    /** Set the default color */\n    this._elementRef.nativeElement.classList.add(this._colorCssClass);\n  }\n\n  ngOnInit() {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host{\n  font-size: inherit;\n  vertical-align: middle;\n  position: relative;\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n\n\n}\nmat-icon{\n  text-align: center;\n}\n.cor-icon{\n  color:inherit;\n}\n",
+                    "styleUrl": "./icon.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "elementRef",
+                        "type": "ElementRef"
+                    },
+                    {
+                        "name": "iconRegistry",
+                        "type": "MatIconRegistry"
+                    },
+                    {
+                        "name": "sanitizer",
+                        "type": "DomSanitizer"
+                    }
+                ],
+                "line": 112,
+                "jsdoctags": [
+                    {
+                        "name": "elementRef",
+                        "type": "ElementRef",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "iconRegistry",
+                        "type": "MatIconRegistry",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "sanitizer",
+                        "type": "DomSanitizer",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": "_CorIconMixinBase",
+            "implements": [
+                "OnInit",
+                "CanColorText"
+            ],
+            "accessors": {
+                "size": {
+                    "name": "size",
+                    "setSignature": {
+                        "name": "size",
+                        "type": "void",
+                        "args": [
+                            {
+                                "name": "num",
+                                "type": "number"
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 56,
+                        "description": "<p>The size of the icon (in pixels). </p>\n",
+                        "jsdoctags": [
+                            {
+                                "name": "num",
+                                "type": "number",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "iconIsLigature": {
+                    "name": "iconIsLigature",
+                    "setSignature": {
+                        "name": "iconIsLigature",
+                        "type": "void",
+                        "args": [
+                            {
+                                "name": "value",
+                                "type": "boolean"
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 67,
+                        "description": "<p>Whether the icon is a ligature</p>\n",
+                        "jsdoctags": [
+                            {
+                                "name": "value",
+                                "type": "boolean",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    },
+                    "getSignature": {
+                        "name": "iconIsLigature",
+                        "type": "",
+                        "returnType": "",
+                        "line": 71
+                    }
+                },
+                "iconSetClass": {
+                    "name": "iconSetClass",
+                    "setSignature": {
+                        "name": "iconSetClass",
+                        "type": "void",
+                        "args": [
+                            {
+                                "name": "value",
+                                "type": "string"
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 77,
+                        "description": "<p>The icon class set. The default is material-icons </p>\n",
+                        "jsdoctags": [
+                            {
+                                "name": "value",
+                                "type": "string",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    },
+                    "getSignature": {
+                        "name": "iconSetClass",
+                        "type": "",
+                        "returnType": "",
+                        "line": 81
+                    }
+                },
+                "icon": {
+                    "name": "icon",
+                    "setSignature": {
+                        "name": "icon",
+                        "type": "void",
+                        "args": [
+                            {
+                                "name": "icon",
+                                "type": "string"
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 89,
+                        "description": "<p>The icon name. </p>\n",
+                        "jsdoctags": [
+                            {
+                                "name": "icon",
+                                "type": "string",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "templateData": "<mat-icon *ngIf=\"!_isCorIcon\"\n          class=\"cor-icon\"\n          [style.fontSize]=\"inline? null: !_size && iconIsLigature? 'inherit': !iconIsLigature? _size * _faReductionFactor + 'px': _size + 'px'\"\n          [style.paddingTop]=\"!iconIsLigature?_size === 12? null: '1px':null\"\n          [inline]=\"inline\"\n          [style.height.px]=\"inline? null: iconIsLigature? _size: _size * _faReductionFactor\"\n          [style.width.px]=\"inline?null: iconIsLigature? _size: _size * _faReductionFactor\"\n          [matBadge]=\"badge\" [matBadgeSize]=\"badgeSize\"\n          [matBadgeColor]=\"badgeBackground\" [matBadgeHidden]=\"badgeIsHidden\"\n          [class.cor-disabled]=\"disabled\"\n          [class.cor-color-txt-disabled]=\"disabled\"\n          [fontIcon]=\"_icon\"\n          [fontSet]=\"iconSetClass\"> {{iconIsLigature? _icon: ''}}</mat-icon>\n<mat-icon *ngIf=\"_isCorIcon\"\n          class=\"cor-icon\"\n          [svgIcon]=\"_icon\"\n          [inline]=\"inline\"\n          [style.height.px]=\"inline?null:_size\"\n          [style.width.px]=\"inline?null:_size\"\n          [matBadge]=\"badge\" [matBadgeSize]=\"badgeSize\"\n          [matBadgeColor]=\"badgeBackground\" [matBadgeHidden]=\"badgeIsHidden\"\n          [class.cor-disabled]=\"disabled\"\n          [class.cor-color-txt-disabled]=\"disabled\" > </mat-icon>\n"
+        }
+    ],
+    "modules": [
+        {
+            "name": "CoreModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "CorBackgroundDirective"
+                        },
+                        {
+                            "name": "CorButtonDirective"
+                        },
+                        {
+                            "name": "CorColorDirective"
+                        },
+                        {
+                            "name": "CorMeasureElementDirective"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "CorBackgroundDirective"
+                        },
+                        {
+                            "name": "CorButtonDirective"
+                        },
+                        {
+                            "name": "CorColorDirective"
+                        },
+                        {
+                            "name": "CorMeasureElementDirective"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "CorIconModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "CorIconComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "CorIconComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        }
+    ],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "_CorIconMixinBase",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/core/src/lib/icon/icon.component.ts",
+                "type": "",
+                "defaultValue": "mixinColorText(CorIconBase, 'secondary')"
+            }
+        ],
+        "functions": [
+            {
+                "name": "mixinBackground",
+                "file": "libs/core/src/lib/core/common-behaviors/background.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "description": "<p>Mixin to augment a directive with a <code>background</code> property. </p>\n",
+                "args": [
+                    {
+                        "name": "base"
+                    },
+                    {
+                        "name": "defaultColor",
+                        "optional": true
+                    }
+                ],
+                "jsdoctags": [
+                    {
+                        "name": "base",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "defaultColor",
+                        "optional": true,
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "mixinColorText",
+                "file": "libs/core/src/lib/core/common-behaviors/color.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "description": "<p>Mixin to augment a directive with a <code>color</code> property. </p>\n",
+                "args": [
+                    {
+                        "name": "base"
+                    },
+                    {
+                        "name": "defaultColor",
+                        "optional": true
+                    }
+                ],
+                "jsdoctags": [
+                    {
+                        "name": "base",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "defaultColor",
+                        "optional": true,
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            }
+        ],
+        "typealiases": [
+            {
+                "name": "CanColorTextCor",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "Constructor<CanColorText>",
+                "file": "libs/core/src/lib/core/common-behaviors/color.ts",
+                "description": "",
+                "kind": 161
+            },
+            {
+                "name": "CanSetBackgroundCor",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "Constructor<CanSetBackground>",
+                "file": "libs/core/src/lib/core/common-behaviors/background.ts",
+                "description": "",
+                "kind": 161
+            },
+            {
+                "name": "Constructor",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "",
+                "file": "libs/core/src/lib/core/common-behaviors/color.ts",
+                "description": "",
+                "kind": 163
+            }
+        ],
+        "enumerations": [],
+        "groupedVariables": {
+            "libs/core/src/lib/icon/icon.component.ts": [
+                {
+                    "name": "_CorIconMixinBase",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/core/src/lib/icon/icon.component.ts",
+                    "type": "",
+                    "defaultValue": "mixinColorText(CorIconBase, 'secondary')"
+                }
+            ]
+        },
+        "groupedFunctions": {
+            "libs/core/src/lib/core/common-behaviors/background.ts": [
+                {
+                    "name": "mixinBackground",
+                    "file": "libs/core/src/lib/core/common-behaviors/background.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "description": "<p>Mixin to augment a directive with a <code>background</code> property. </p>\n",
+                    "args": [
+                        {
+                            "name": "base"
+                        },
+                        {
+                            "name": "defaultColor",
+                            "optional": true
+                        }
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "base",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "defaultColor",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "libs/core/src/lib/core/common-behaviors/color.ts": [
+                {
+                    "name": "mixinColorText",
+                    "file": "libs/core/src/lib/core/common-behaviors/color.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "description": "<p>Mixin to augment a directive with a <code>color</code> property. </p>\n",
+                    "args": [
+                        {
+                            "name": "base"
+                        },
+                        {
+                            "name": "defaultColor",
+                            "optional": true
+                        }
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "base",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "defaultColor",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "groupedEnumerations": {},
+        "groupedTypeAliases": {
+            "libs/core/src/lib/core/common-behaviors/color.ts": [
+                {
+                    "name": "CanColorTextCor",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "Constructor<CanColorText>",
+                    "file": "libs/core/src/lib/core/common-behaviors/color.ts",
+                    "description": "",
+                    "kind": 161
+                },
+                {
+                    "name": "Constructor",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "",
+                    "file": "libs/core/src/lib/core/common-behaviors/color.ts",
+                    "description": "",
+                    "kind": 163
+                }
+            ],
+            "libs/core/src/lib/core/common-behaviors/background.ts": [
+                {
+                    "name": "CanSetBackgroundCor",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "Constructor<CanSetBackground>",
+                    "file": "libs/core/src/lib/core/common-behaviors/background.ts",
+                    "description": "",
+                    "kind": 161
+                }
+            ]
+        }
+    },
+    "routes": [],
+    "coverage": {
+        "count": 21,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "libs/core/src/lib/core/common-behaviors/background.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "CanSetBackground",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/core/src/lib/core/common-behaviors/background.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "HasElementRef",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/core/src/lib/core/common-behaviors/background.ts",
+                "type": "function",
+                "linksubtype": "function",
+                "name": "mixinBackground",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "libs/core/src/lib/core/common-behaviors/color.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "CanColorText",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/core/src/lib/core/common-behaviors/color.ts",
+                "type": "function",
+                "linksubtype": "function",
+                "name": "mixinColorText",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "libs/core/src/lib/core/directives/background.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "CorBackgroundDirective",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/core/src/lib/core/directives/button.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "CorButtonDirective",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/core/src/lib/core/directives/color.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "CorColorDirective",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/core/src/lib/core/directives/measure-element.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "CorMeasureElementDirective",
+                "coveragePercent": 0,
+                "coverageCount": "0/11",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/core/src/lib/icon/icon.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CorIconComponent",
+                "coveragePercent": 52,
+                "coverageCount": "12/23",
+                "status": "good"
+            },
+            {
+                "filePath": "libs/core/src/lib/icon/icon.component.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "CorIconBase",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/core/src/lib/icon/icon.component.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "_CorIconMixinBase",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            }
+        ]
+    }
+}

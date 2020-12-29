@@ -1,0 +1,132 @@
+@import '~@angular/material/theming';
+
+$default-palette-colors: (
+  pal-green : #00C853,
+  pal-light-green : #3EF211,
+  pal-orange : #FF9800,
+  pal-bright-orange : #F44336,
+  pal-pink : #E91E63,
+  pal-purple : #673AB7,
+  pal-light-purple : #be9fe1,
+  pal-blue : #3F51B5,
+  pal-light-blue : #38a9ee,
+  pal-lime : #CDDC39,
+  pal-brown : #795548,
+  pal-gold : #F8C100,
+  pal-grey : #C0C0C0,
+  pal-white : #ffffff,
+  contrast: (
+    pal-green : #ffffff,
+    pal-light-green : #ffffff,
+    pal-orange : #ffffff,
+    pal-bright-orange : #ffffff,
+    pal-pink : #ffffff,
+    pal-purple : #ffffff,
+    pal-light-purple : #ffffff,
+    pal-blue : #ffffff,
+    pal-light-blue : #ffffff,
+    pal-lime : #ffffff,
+    pal-brown : #ffffff,
+    pal-gold : #ffffff,
+    pal-grey : #ffffff,
+    pal-white : #000000,
+  )
+);
+
+
+$default-app: (
+  app-is-logged-in : #3EF211,
+  app-rating: #F8C100,
+  app-link: #38a9ee ,
+  app-youtube: #FF0001,
+  contrast: (
+    app-is-logged-in : rgba(black,.54),
+    app-rating: #FFFFFF,
+    app-link: #FFFFFF ,
+    app-youtube: #FFFFFF,
+  )
+);
+
+$cor-default-theme-primary: (
+  50 : #E2F5FE,
+  100 : #B6E5FB,
+  200 : #88D4F8,
+  300 : #5EC3F3,
+  400 : #45B6F1,
+  500 : #38A9EE,
+  600 : #349BDF,
+  700 : #2F88CB,
+  800 : #2B77B7,
+  900 : #235794,
+  A100 : #6c57ff,
+  A200 : #38A9EE,
+  A400 : #1e00f0,
+  A700 : #1b00d6,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+$cor-default-theme-accent: (
+  50 : #F9F6FF,
+  100 : #F2EFFF,
+  200 : #E9E6FF,
+  300 : #D9D7F3,
+  400 : #B5B3CE,
+  500 : #9693AE,
+  600 : #6D6B84,
+  700 : #595870,
+  800 : #3A3950,
+  900 : #19192D,
+  A100 : #30a64a,
+  A200 : #359bdf,
+  A400 : #feb22b,
+  A700 : #feb7c2,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #FFFFFF,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+
+@function cor-app-theme($rdm-colors: mat-palette($default-palette-colors), $app: mat-palette($default-app)){
+  @return  (
+    app: $app,
+    pal:$rdm-colors
+  );
+}
+@function cor-light-theme($mat-theme, $cor-theme: cor-app-theme()){
+  @return map-merge($mat-theme, $cor-theme);
+}
+@function cor-dark-theme($mat-theme, $cor-theme: cor-app-theme()){
+  @return map-merge($mat-theme, $cor-theme);
+}
+
+$mat-default-primary: mat-palette($cor-default-theme-primary);
+$mat-default-accent: mat-palette($cor-default-theme-accent);
+$mat-default-light-theme: mat-light-theme($mat-default-primary, $mat-default-accent);
+$cor-default-light-theme: cor-light-theme($mat-default-light-theme);

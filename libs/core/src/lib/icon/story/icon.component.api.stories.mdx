@@ -1,0 +1,20 @@
+import { Story, Meta, ArgsTable } from '@storybook/addon-docs/blocks';
+import { moduleMetadata } from '@storybook/angular';
+import { CommonModule } from '@angular/common';
+import { CorIconModule } from '../icon.module';
+import { CorIconComponent } from '../icon.component';
+
+<Meta title="Icons/API"
+  decorators={[moduleMetadata({
+      imports: [
+        CommonModule,
+        CorIconModule
+      ]
+})]}/>
+
+# Icon API
+
+`import { CorIconModule } from '@umbrelo/core';`
+
+<ArgsTable of={CorIconComponent}/>
+

@@ -1,0 +1,69 @@
+@import '~@angular/material/theming';
+
+@mixin cor-shared-buttons-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $is-dark: map-get($theme, is-dark);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $rdm-color: map-get($theme, rdm-color);
+  $app: map-get($theme, app);
+
+
+  .cor-priority-nav{
+    cor-icon {
+      mat-icon{
+        color: inherit !important;
+      }
+    }
+  }
+
+  .cor-button-base, .cor-button, .cor-button-radius, .cor-button-icon{
+    min-width: 0;
+    margin: 0;
+    user-select: none;
+    overflow: hidden;
+    text-align: start;
+    font-family: inherit;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    text-decoration: none;
+  }
+  // Button
+  .cor-button, .cor-button-radius {
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    position: relative;
+    padding: 0 8px;
+    min-height: 36px;
+  }
+  .cor-button-radius {
+    border-radius: 4px;
+  }
+  .cor-button-icon{
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+
+    &:hover{
+     background: mat-color($background, hover);
+    }
+  }
+
+  .cor-button-mobile{
+    width: 100% !important;
+    min-height: 48px !important;
+    padding: 0 16px;
+  }
+}

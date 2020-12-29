@@ -16,9 +16,12 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "accessToken": "OWFiNDg4N2EtZWJkNy00NmU5LTk1MTItY2Y0YjU4ZTUyMzA0fHJlYWQtd3JpdGU=",
+        "cacheableOperations": ["build", "test", "lint", "e2e"],
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
       }
     }
   },
@@ -29,6 +32,19 @@
     "umbrelo/main-e2e": {
       "tags": [],
       "implicitDependencies": ["umbrelo-main"]
+    },
+    "core": {
+      "tags": []
+    },
+    "data": {
+      "tags": []
+    },
+    "core-e2e": {
+      "tags": [],
+      "implicitDependencies": ["core"]
+    },
+    "transcoder": {
+      "tags": []
     }
   }
 }

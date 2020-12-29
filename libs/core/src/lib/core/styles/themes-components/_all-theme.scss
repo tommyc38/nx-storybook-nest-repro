@@ -1,0 +1,25 @@
+//@import "../../../list-item/list-item-theme";
+//@import "../../../account-selector/account-selector-theme";
+//@import "../../../avatar/avatar-theme";
+//@import "../../../shell/shell-theme";
+//@import "../../../text/text-theme";
+//@import "../../../mention/mention-theme";
+//@import "../../../uploader/uploader-theme";
+//@import "../../../theater/theater-theme";
+//@import "../../../timeline/timeline-theme";
+@import "../global/shared-global";
+
+
+
+@mixin cor-components-theme($theme) {
+  //@include cor-account-selector-theme($theme);
+  //@include cor-list-item-theme($theme);
+  //@include cor-text-theme($theme);
+  //@include cor-avatar-theme($theme);
+  @include cor-shared-global-theme($theme);
+  //@include cor-mentions-theme($theme);
+  //@include cor-uploader-theme($theme);
+  //@include cor-theater-theme($theme);
+  //@include cor-shell-theme($theme);
+  //@include cor-timeline-theme($theme);
+}

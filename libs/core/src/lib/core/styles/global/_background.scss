@@ -1,0 +1,96 @@
+
+@mixin cor-bg-palette($palette) {
+  @each $name, $hex in $palette {
+    @if type-of($hex) == color and str_index($name,'contrast') == null{
+      &#{$name} {
+        background:$hex;
+      }
+    }
+  }
+}
+
+@mixin cor-color-bg($name-to-palette-map, $is-dark) {
+
+  @each $name, $color in $name-to-palette-map {
+    @if str_index($name,'contrast')  {
+
+    } @else {
+
+      &#{$name} {
+        background: mat-color($color);
+      }
+      &#{$name}-hover {
+        background: mat-color($color);
+
+        &:hover {
+          background: mat-color($color, 'darker');
+        }
+      }
+      &#{$name}-light {
+        background: mat-color($color, lighter);
+      }
+
+      &#{$name}-light-hover {
+        background: mat-color($color, lighter);
+
+        &:hover {
+          background: mat-color($color, 300);
+        }
+      }
+      &#{$name}-dark {
+        background: mat-color($color, 'darker');
+      }
+      &hover-#{$name} {
+        &:hover {
+          background: mat-color($color);
+        }
+      }
+      &hover-#{$name}-light {
+        &:hover {
+          background: mat-color($color, 'lighter');
+        }
+      }
+      &hover-#{$name}-dark {
+        &:hover {
+          background: mat-color($color, 'darker');
+        }
+      }
+  }
+  }
+}
+
+  @mixin cor-shared-background-theme($theme) {
+
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $is-dark: map-get($theme, is-dark);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+    $pal: map-get($theme, pal);
+    $app: map-get($theme, app);
+
+    $cor-name-map: (
+      primary: $primary,
+      accent: $accent,
+      warn: $warn,
+    );
+
+    .cor-bg-main-{
+      @include cor-color-bg($cor-name-map, $is-dark);
+    }
+    .cor-bg-{
+      @include cor-bg-palette($app);
+    }
+    .cor-bg-{
+      @include cor-bg-palette($pal);
+    }
+    .cor-bg-main-default {
+      background: mat-color($background, hover);
+    }
+    .cor-bg-main-hover-default {
+      &:hover {
+        background: mat-color($background, hover);
+      }
+    }
+}

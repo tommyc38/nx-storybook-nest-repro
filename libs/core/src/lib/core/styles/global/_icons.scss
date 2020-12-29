@@ -1,0 +1,164 @@
+@import '~@angular/material/theming';
+
+@mixin cor-shared-icons-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $is-dark: map-get($theme, is-dark);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $rdm-color: map-get($theme, rdm-color);
+  $app: map-get($theme, app);
+
+  // Icon
+  .cor-icon-fa-normalize {
+    font-size: 80%;
+  }
+  // This is is necessary when icons are overlayed on top of multicolored backgrounds (e.g. images).
+  .cor-icon-white-bg-square{
+    &:after{
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      top: calc(50% - 7px);
+      left: calc(50% - 7px);
+      background: white;
+      z-index: -1;
+    }
+  }
+
+  .cor-icon-white-bg-vert-rect{
+    &:after{
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 10px;
+      top: calc(50% - 7px);
+      left: calc(50% - 5px);
+      background: white;
+      z-index: -1;
+    }
+  }
+
+
+
+  // This icon renders smaller than most 24px sized material icons.
+ .cor-normalize-cor-mat-pdf-box-icon{
+   transform: scale(1.13);
+ }
+  .cor-icon-fa-mat-icon-normalize {
+    padding-top: 1px;
+    font-size: calc(24px * .85);
+    height: calc(24px * .85);
+    width: calc(24px * .85);
+  }
+
+
+  .cor-icon-caret-collapsed-r16, .cor-icon-caret-collapsed-r8, .cor-icon-caret-collapsed-icon-r8,
+  .cor-icon-caret-collapsed-l16, .cor-icon-caret-collapsed-l8, .cor-icon-caret-collapsed-r24,
+  .cor-icon-caret-collapsed-icon-l, .cor-icon-caret-collapsed-icon-r,
+  .cor-icon-caret-collapsed-l,.cor-icon-caret-collapsed-r,
+  cor-list-item-content.cor-icon-caret-collapsed-list-item-l cor-text div :first-child,
+  cor-list-item-content.cor-icon-caret-collapsed-list-item-r cor-text div :last-child {
+    position: relative;
+
+    &:after {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 5px 0 5px 5px;
+      border-color: transparent transparent transparent currentColor;
+      content: '';
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      transition: transform .1s ease-out;
+      transform: translateY(-50%);
+    }
+  }
+  .cor-icon-caret-collapsed-icon-l,{
+    &:after {
+      left: -11px;
+    }
+  }
+  .cor-icon-caret-collapsed-icon-r {
+    &:after {
+      right: -8px;
+    }
+  }
+  .cor-icon-caret-collapsed-r24,{
+    padding-right: calc(16px + 24px) !important;
+    &:after {
+      right: 24px;
+    }
+  }
+
+  .cor-icon-caret-collapsed-l,
+  cor-list-item-content.cor-icon-caret-collapsed-list-item-l cor-text div :first-child {
+
+    &:after {
+      left: -14px;
+    }
+  }
+
+  .cor-icon-caret-collapsed-r,
+  cor-list-item-content.cor-icon-caret-collapsed-list-item-r cor-text div :last-child {
+    &:after {
+      right: -12px !important;
+    }
+  }
+
+
+  .cor-icon-caret-collapsed-r8 {
+    padding-right: calc(5px + 16px) !important;
+
+    &:after {
+      right: 8px;
+    }
+  }
+  .cor-icon-caret-collapsed-icon-r8 {
+    padding-right: calc(5px + 16px) !important;
+
+    &:after {
+      right: 11px;
+    }
+  }
+
+  .cor-icon-caret-collapsed-r16 {
+    padding-right: calc(5px + 24px) !important;
+
+    &:after {
+      right: 16px;
+    }
+  }
+
+  .cor-icon-caret-collapsed-l16 {
+    padding-left: calc(5px + 24px) !important;
+
+    &:after {
+      left: 16px;
+    }
+  }
+
+  .cor-icon-caret-collapsed-l8 {
+    padding-left: calc(5px + 16px) !important;
+
+    &:after {
+      left: 8px;
+    }
+  }
+
+  .cor-icon-caret-expanded,
+  cor-list-item-content.cor-icon-caret-expanded cor-text span:first-of-type {
+    &:after {
+      transform: rotateZ(90deg) translateX(-80%);
+    }
+  }
+  .cor-icon-caret-default-color {
+    &:after {
+      border-color: transparent transparent transparent mat-color($foreground, secondary-text) !important;
+    }
+  }
+
+}
